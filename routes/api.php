@@ -10,6 +10,10 @@ Route::get('/example', function () {
     echo 'My API is Working!';
 });
 
+Route::get('/example-production', function () {
+    echo 'My API is Working in Production!';
+});
+
 Route::post('/sent-email', [EmailsController::class, 'sendMessage']);
 
 Route::post('/example-sent-email', function () {
