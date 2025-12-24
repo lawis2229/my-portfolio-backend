@@ -29,7 +29,6 @@ RUN php artisan key:generate --force || true
 RUN php artisan config:clear
 RUN php artisan route:clear
 RUN php artisan view:clear
-RUN php artisan cache:clear
 
 RUN php artisan optimize
 RUN php artisan config:cache
