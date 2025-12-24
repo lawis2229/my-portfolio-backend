@@ -25,7 +25,6 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chmod -R 777 storage bootstrap/cache
 
 # Optimize Laravel (VERY IMPORTANT)
-RUN php artisan key:generate --force || true
 RUN php artisan optimize
 
 EXPOSE 10000
