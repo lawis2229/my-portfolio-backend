@@ -27,13 +27,7 @@ RUN chmod -R 777 storage bootstrap/cache
 # Optimize Laravel (VERY IMPORTANT)
 RUN php artisan key:generate --force || true
 RUN php artisan config:clear
-RUN php artisan route:clear
-RUN php artisan view:clear
-
 RUN php artisan optimize
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
 
 EXPOSE 10000
 
