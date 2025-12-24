@@ -18,11 +18,28 @@ WORKDIR /app
 
 COPY . .
 
+# Install dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader
 
+# Permissions
 RUN chmod -R 777 storage bootstrap/cache
+
+# Optimize Laravel (VERY IMPORTANT)
+RUN php artisan key:generate --force || true
+RUN php artisan config:clear
+RUN php artisan route:clear
+RUN php artisan view:clear
+RUN php artisan cache:clear
+
+RUN php artisan optimize
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
 
 EXPOSE 10000
 
-# Run migrations on startup, then serve
-CMD sh -c "php artisan migrate --force || true && php artisan serve --host=0.0.0.0 --port=10000"
+# Run migrations then serve
+CMD sh -c "\
+php artisan migrate --force || true && \
+php artisan serve --host=0.0.0.0 --port=10000 \
+"
